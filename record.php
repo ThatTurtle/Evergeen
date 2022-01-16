@@ -14,13 +14,14 @@
     include_once 'includes/db.php';
     include_once 'includes/functions.php';
     session_start();   
+    $ID = $_REQUEST['ID'];
     if(isset($_SESSION['UID'])){
         $UID = $_SESSION['UID'];
     }else{
         echo "<script type='text/javascript'>alert('Error: No user logged in'); window.location.href='index.php';</script>";
     }
 
-    $sql = "select * from clientdetails where ID=".$ID;
+    $sql = "select * from clientdetails where ID=".$ID." and client_of =".$UID;
 
     if($result = mysqli_query($conn, $sql)){
         if(mysqli_num_rows($result) > 0)
